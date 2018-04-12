@@ -1,18 +1,23 @@
 const express       = require('express');
 const router        = express.Router();
 const bodyParser    = require('body-parser');
-const environment   = 'production';
+const environment   = /*'development';*/ 'production';
 const configuration = require('../knexfile.js')[environment];
 const knex          = require('knex')(configuration);
 const session       = require('express-session');
-
+const cookieSession = require('cookie-session')
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}))
 
-router.use(session({
-  secret: 'notGoingToWork',
-  resave: false,
-  saveUninitialized: true
+// router.use(session({
+//   secret: 'notGoingToWork',
+//   resave: false,
+//   saveUninitialized: true
+// }))
+
+router.use(cookieSession({
+  name: 'session',
+  keys: ['fracking', 'is very bald', 'minus the L']
 }))
 
 var userDB = {
@@ -96,16 +101,18 @@ router.get('/personNotes/:email', (req, res) => {
 
 router.get('/logout', (req, res) => {
   console.log("Logout Called.")
-  req.session.destroy((err) => {
-    // cannot access session here
-    if(err) {
-      console.log("ERROR", err)
-      res.send("There has been an error, try to logout again.")
-    } else {
-      console.log("logged out")
-      res.sendStatus(200)
-    }
-  })
+  // req.session.destroy((err) => {
+  //   // cannot access session here
+  //   if(err) {
+  //     console.log("ERROR", err)
+  //     res.send("There has been an error, try to logout again.")
+  //   } else {
+  //     console.log("logged out")
+  //     res.sendStatus(200)
+  //   }
+  // })
+  req.session = null;
+  res.sendStatus(200)
 })
 
 router.get('/:email', (req, res) => {

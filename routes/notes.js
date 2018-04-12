@@ -1,7 +1,7 @@
 const express       = require('express');
 const router        = express.Router();
 const bodyParser    = require('body-parser');
-const environment   = 'production';
+const environment   = /*'development';*/ 'production';
 const configuration = require('../knexfile.js')[environment];
 const knex          = require('knex')(configuration);
 

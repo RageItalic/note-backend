@@ -56,6 +56,7 @@ var userDB = {
 }
 
 router.post('/login', (req, res) => {
+  console.log("HELLLLLO")
   console.log("body", req.body)
   const loggedUser = userDB.users.find(user => user.email == req.body.email && user.password == req.body.password)
   console.log("user exists, ", loggedUser)

@@ -4,7 +4,7 @@ const bodyParser    = require('body-parser');
 const environment   = /*'development';*/ 'production';
 const configuration = require('../knexfile.js')[environment];
 const knex          = require('knex')(configuration);
-const session       = require('express-session');
+//const session       = require('express-session');
 const cookieSession = require('cookie-session')
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}))

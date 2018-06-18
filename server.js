@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 5000;
 //app.use(cors());
 
 app.use(cors({
-  origin: 'https://note-frontend.firebaseapp.com',
+  origin: ['https://note-frontend.firebaseapp.com', 'http://localhost:3000'],
   credentials: true
 }));
 
